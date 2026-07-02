@@ -143,3 +143,56 @@ pip install -r requirements.txt
 - ч/Ч → 4
 - ш/Ш → 6
 - щ/Щ → 6
+
+## Building from Source
+
+### Building with Custom Icon and Name
+
+The project includes an enhanced build script that creates a standalone executable named `LeatSpeakTraslator.exe` (Windows) or `LeatSpeakTraslator` (Linux/macOS) with a custom icon.
+
+#### Windows Build Command
+
+For a direct build with PyInstaller:
+
+```bash
+pyinstaller --onefile --windowed --name LeatSpeakTraslator --icon icon.ico --clean --noconfirm --add-data "config.json;." --hidden-import customtkinter --hidden-import tkinter main.py
+```
+
+#### Using the Build Script
+
+The easier way is to use the provided `build.py` script:
+
+```bash
+python build.py
+```
+
+This script will:
+1. Check for and install PyInstaller if needed
+2. Create a placeholder icon if `icon.ico` doesn't exist
+3. Build for your current platform (Windows/Linux/macOS)
+4. Include all necessary data files
+5. Output executable to `dist/` folder
+
+#### Creating a Custom Icon
+
+1. Create a 256x256 pixel icon using a tool like:
+   - [ICO Convert](https://icoconvert.com/)
+   - [Favicon Generator](https://favicon.io/)
+   - Any image editor with .ico export
+
+2. Save it as `icon.ico` in the project root
+
+3. Run the build script again
+
+### Build Output
+
+- **Windows**: `dist/LeatSpeakTraslator.exe`
+- **Linux**: `dist/LeatSpeakTraslator`
+- **macOS**: `dist/LeatSpeakTraslator.app` (bundle)
+
+The build includes:
+- Custom icon support
+- Platform-specific optimizations
+- Data file inclusion (config.json)
+- Clean build process
+- Progress reporting and error handling
